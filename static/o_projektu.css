@@ -1,0 +1,34 @@
+.container {
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+.founder {
+  text-align: center;
+}
+
+.founder img {
+  width: 50%;
+  height: auto;
+  margin-top: 20px;
+}
+
+.founder h1 {
+  font-size: 36px;
+  margin-top: 50px;
+}
+
+.founder h2 {
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.project h3 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.project p {
+  font-size: 16px;
+  line-height: 1.5;
+}

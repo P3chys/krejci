@@ -1,0 +1,68 @@
+<!--Navigacni lista + footer-->
+{%extends 'navbar.html'%}
+
+{% block title %}
+Registrace
+{% endblock %}
+
+{% block content %}
+ <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
+<!--<h2>Toto je stránka registrace</h2>-->
+<div class="standard-form">
+  <h2>Registrace</h2>
+  <form class="registrace" method="POST" action="{{url_for('registrace2') }}">
+
+    <div style="margin-bottom: 20px">
+      <label>Jste:</label>
+      <input type="radio" value="instruktor" id="instruktor" name="usertype" required onchange="statusChange(this.value);"><label for="instruktor" style="padding: 0;">Instruktor</label>
+      <input type="radio" value="student" id="student" name="usertype" required onchange="statusChange(this.value);"><label for="student" style="padding: 0;">Student</label>
+    </div>
+
+    <label for="jmeno" class="text1">Jméno:</label>
+    <input type="text" id="jmeno" name="jmeno" class="jmeno" required>
+
+    <label for="prijmeni" class="text1">Příjmení:</label>
+    <input type="text" id="prijmeni" name="prijmeni"  required>
+
+    <label for="email" class="text1">Email:</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="datum" class="text1">Datum narození:</label>
+    <input type="date" id="datum" name="datum" required>
+
+    <label for="telefon" class="text1">Telefon:</label>
+    <input type="tel" id="telefon" name="telefon" pattern="[0-9]{9}" required>
+
+    <select multiple size="10" name="certifikace">
+      {% for c in certifikace %}
+        <option class="multioption" value="{{c.id_c}}">{{c.licence}}</option>
+      {% endfor %}
+    </select>
+
+    <span style="display: none;" id="instruktor-udaje">
+      <label for="cena">Cena za hodinu:</label>
+      <input type="number" id="cena" name="cena">
+
+      <label for="ucet">Číslo účtu:</label>
+      <input type="text" id="ucet" name="ucet">
+    </span>
+
+    <label for="username" class="text1">Uživatelské jméno:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password" class="text1">Heslo:</label>
+    <input type="password" id="password" name="password" required>
+
+<!--Zadání špatných údajů-->
+    {%
+      if data == "existing"
+    %}
+      <p style="color: red">Účet s tímto uživatelským jménem již existuje!</p>
+    {% endif %}
+
+    <input type="submit" value="Submit">
+  </form>
+  <p>Máte účet? <a href="{{url_for('login2')}}" class="a-inline">Přihlaste se!</a></p>
+</div>
+
+{% endblock %}

@@ -1,0 +1,55 @@
+<!--Navigacni lista-->
+{%extends 'navbar.html'%}
+
+{% block title %}
+Instruktoři
+{% endblock %}
+
+<!--Data, ktere se mi zobrazuji jenom na teto strance a nikde jinde ne -->
+{% block content %}
+
+<link rel="stylesheet" href="{{url_for('static', filename='instruktori.css') }}">
+<h2 class="nadpis-stranka">Zde si můžeš zobrazit registrované instruktory</h2>
+<div class="skryty-form" style="{% if pocet_filtru == 0 %}display: none{% endif %}">
+	<form action="{{ url_for('instruktori') }}" method="GET">
+	  <select multiple name="filtry" size="10">
+	    {% for filtr in filtry %}
+	      {% if filtr.id_c in pouzite_filtry %}
+	        <option class="multioption" value="{{filtr.id_c}}" selected>{{filtr.licence}}</option>
+	      {% else %}
+	        <option class="multioption" value="{{filtr.id_c}}">{{filtr.licence}}</option>
+	      {% endif %}
+	    {% endfor %}
+	  </select>
+	  <input type="submit" value="Filtrovat" style="margin-top: 0">
+	</form>
+	<a href="{{ url_for('instruktori') }}"><button>Zrušit filtry</button></a>
+</div>
+<div class="skryty-button" style="{% if pocet_filtru > 0 %}display: none{% endif %}">
+	<button onclick="filtrace();">Filtrace</button>
+</div>
+<div class="container">
+<table rules="rows" border="1">
+	<thead>
+	  <tr>
+	    <th>Jméno</th>
+	    <th>Příjmení</th>
+	    <th>Certifikace</th>
+	    <th>E-mail</th>
+	    <th>Telefon</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  {% for instruktor in instruktori %}
+	    <tr>
+	      <td>{{ instruktor["jmeno"] }}</td>
+	      <td>{{ instruktor["prijmeni"] }}</td>
+	      <td>{{ certifikace[instruktor["id"]] }}</td>
+	      <td>{{ instruktor["email"] }}</td>
+	      <td>{{ instruktor["telefon"] }}</td>
+	    </tr>
+	  {% endfor %}
+	</tbody>
+</table>
+</div>
+{% endblock %}

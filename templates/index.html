@@ -1,0 +1,66 @@
+<!--Navigacni lista-->
+{% extends 'navbar.html' %}
+
+{% block title %}
+Webová stránka pro potápěče
+{% endblock %}
+
+<!--Data, ktere se mi zobrazuji jenom na teto strance a nikde jinde ne -->
+{% block content %}
+ <link rel="stylesheet" href="{{url_for('static', filename='banner.css') }}">
+ <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
+
+    <!--Banner-->
+ <div class="banner">
+        <div class="container">
+            <div class="banner-content">
+                <h1>HLEDÁŠ INSTRUKTORA?</h1>
+
+                <p class="banner-text">Vítejte na mojí stránce, která vznikla jako můj maturitní projekt. Toto téma jsem si zvolil,
+                    protože posledních pár let je potápění mým koníčkem. Za tu dobu jsem nenarazil na žádnou stránku,
+                    kde by bylo více instruktorů a já si mohl vybrat z jejich služeb. Proto jsem si řekl, že vytvořím
+                    tuto webovou stránku.
+                </p>
+
+                <a href="{{url_for('login2')}}" class="btn-one">Přihlásit se</a>
+                <a href="{{url_for('o_projektu')}}" class="btn-two">O projektu</a>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!--Item box-->
+
+    <div class="item-container">
+  <div class="item-box">
+    <img src="https://www.greenqueen.com.hk/wp-content/uploads/2019/04/zublu_bali-3.jpg" alt="Obrázek">
+    <div class="item-content">
+      <h3>O projektu</h3>
+      <p>Zjisti o čem je tento projekt!</p>
+      <a href="{{url_for('o_projektu')}}" class="button">Chci vědět více!</a>
+    </div>
+  </div>
+
+  <div class="item-box">
+    <img src="data:image/jpeg;base64,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" alt="Obrázek">
+    <div class="item-content">
+      <h3>Přihlásit se</h3>
+      <p>Už si registrovaný, tak se přihlaš!</p>
+      <a href="{{url_for('login2')}}" class="button">Přihlásit se!</a>
+    </div>
+  </div>
+
+  <div class="item-box">
+    <img src="https://www.scubadiving.com/sites/scubadiving.com/files/styles/500_1x_/public/scuba-myths-shutterstock_208265431.jpg?itok=sv5KIWuo" alt="Obrázek">
+    <div class="item-content">
+      <h3>Registruj se</h3>
+      <p>Pojď se registrovat!</p>
+      <a href="{{url_for('registrace2')}}" class="button">Registrovat se</a>
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

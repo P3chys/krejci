@@ -1,0 +1,67 @@
+<!--Navigacni lista-->
+{%extends 'navbar.html'%}
+
+{% block title %}
+Lekce
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='lekce_student.css') }}">
+  <h2>Nabízené lekce</h2>
+  <div class="skryty-form" style="{% if pocet_filtru == 0 %}display: none{% endif %}">
+    <form action="{{ url_for('lekce') }}" method="GET">
+      <select multiple name="filtry">
+        {% for filtr in filtry %}
+          {% if filtr.id_m in pouzite_filtry %}
+            <option class="multioption" value="{{filtr.id_m}}" selected>{{filtr.ulice}} {{filtr.cislo_popisne}}, {{filtr.mesto}} {{filtr.smerovaci_cislo}}</option>
+          {% else %}
+            <option class="multioption" value="{{filtr.id_m}}">{{filtr.ulice}} {{filtr.cislo_popisne}}, {{filtr.mesto}} {{filtr.smerovaci_cislo}}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+      <input type="submit" value="Filtrovat" style="margin-top: 0">
+    </form>
+    <a href="{{ url_for('lekce') }}"><button>Zrušit filtry</button></a>
+  </div>
+  <div class="skryty-button" style="{% if pocet_filtru > 0 %}display: none{% endif %}">
+    <button onclick="filtrace();">Filtrace</button>
+  </div>
+  <table rules="rows" border="1">
+    <thead>
+      <tr>
+        <th>Název lekce</th>
+        <th>Popis lekce</th>
+        <th>Instruktor</th>
+        <th>Datum a čas</th>
+        <th>Doba trvání</th>
+        <th>Adresa</th>
+        <th>Akce</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for class in my_classes %}
+        <tr>
+          <td>{{ class.nazev }}</td>
+          <td>{{ class.popis }}</td>
+          <td>{{ class.jmeno }} {{ class.prijmeni}}</td>
+          <td>{{ class.datum }}</td>
+          <td>{{ class.delka_trvani }}</td>
+          <td>{{class.ulice}} {{class.cislo_popisne}}, {{class.mesto}} {{class.smerovaci_cislo}}</td>
+          <td>
+            <form action="" method="POST">
+              <input type="hidden" name="class_id_l" value="{{ class.id_l }}">
+              <input type="hidden" name="class_id_i" value="{{ class.id_i }}">
+              {% if class.prihlaseno %}
+                <input type="hidden" name="akce" value="odhlasit">
+                <input type="submit" value="Odhlásit se" class="odhlasit-button">
+              {% else %}
+                <input type="hidden" name="akce" value="zapsat">
+                <input type="submit" value="Zapsat se" class="zapsat-button">
+              {% endif %}
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

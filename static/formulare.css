@@ -1,0 +1,123 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: montserrat;
+    background: floralwhite;
+}
+
+.formular {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: deepskyblue;
+    border-radius: 10px;
+    border: 5px solid black;
+}
+
+.formular h2{
+    text-align: center;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid black;
+}
+
+.formular form{
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+form .textove_pole {
+    position: relative;
+    border-bottom: 2px solid black;
+    margin: 30px 0;
+}
+
+.textove_pole input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.textove_pole label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: white;
+    transform: translateY(-50%);
+    font-size: 18px;
+    pointer-events: none;
+    transition: .5s;
+}
+
+.textove_pole span::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: white;
+    transition: .5s;
+}
+
+.textove_pole input:focus ~ label,
+.textove_pole input:valid ~ label{
+    top: -5px;
+    color: grey;
+}
+
+.textove_pole input:focus ~ span::before,
+.textove_pole input:valid ~ span::before{
+    width: 100%;
+
+}
+
+.pass{
+    margin: -5px 0px 20px 5px;
+    color: dimgrey;
+    cursor: pointer;
+}
+
+.pass:hover{
+    text-decoration: underline;
+}
+
+input[type="submit"]{
+    width: 100%;
+    height: 50px;
+    border: 2px solid;
+    background: slategrey;
+    border-radius: 15px;
+    font-size: 20px;
+    color: white;
+    border-color: black;
+    font-weight: 700;
+    cursor: pointer;
+    outline: none;
+}
+
+input[type="submit"]:hover{
+    border-color:red;
+    transition: .5s;
+}
+
+.registrace_link{
+    margin: 30px 0px;
+    text-align: center;
+    font-size: 18px;
+    color: black;
+}
+
+.registrace_link a{
+    color: red;
+    text-decoration: none;
+}
+
+.registrace_link a:hover{
+    text-decoration: underline;
+}

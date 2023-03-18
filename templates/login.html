@@ -1,0 +1,41 @@
+<!--Navigacni lista + footer-->
+{%extends 'navbar.html'%}
+
+
+{% block content %}
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Prihlaseni</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='formulare.css') }}">
+    <link rel="stylesheet" href="../static/formulare.css">
+</head>
+<body>
+    <div class="formular">
+        <h2>Přihlášení</h2>
+        <form method="post">
+            <div class="textove_pole">
+                <input type="text" required>
+                <span></span>
+                <label>Uživatelské jméno</label>
+            </div>
+            <div class="textove_pole">
+                <input type="password" required>
+                <span></span>
+                <label>Heslo</label>
+            </div>
+            <div class="pass">Zapomenuté heslo?</div>
+            <input type="submit" value="přihlásit se">
+            <div class="registrace_link">
+                Nejste registrovaní? <a href="#">Registrace</a>
+
+            </div>
+
+        </form>
+
+
+    </div>
+</body>
+</html>
+
+{% endblock %}

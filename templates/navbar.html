@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='spodni_lista.css') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='vrchni_lista.css') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='formulare2.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+
+<body>
+<header>
+    <div class="navbar">
+        <nav>
+            <ul style="float: left;">
+                <li class="logo"><a href="{{url_for('index')}}">WPP</a></li>
+                <li {% if request.path == url_for('o_projektu') %}class="active"{% endif %}><a href="{{url_for('o_projektu')}}">O projektu</a></li>
+                {% if "username" in session %}
+                    {% if session["usertype"] != "admin" %}
+                        <li {% if request.path == url_for('instruktori') %}class="active"{% endif %}><a href="{{url_for('instruktori')}}">Instruktoři</a></li>
+                        <li {% if request.path == url_for('profil') %}class="active"{% endif %}><a href="{{url_for('profil')}}">Profil</a></li>
+                        <li {% if request.path == url_for('lekce') %}class="active"{% endif %}><a href="{{url_for('lekce')}}">Lekce</a></li>
+                    {% else %}
+                        <li {% if request.path == url_for('uzivatele') %}class="active"{% endif %}><a href="{{url_for('uzivatele')}}">Seznam uživatelů</a></li>
+                    {% endif %}
+                {% endif %}
+                {% if "username" in session %}
+                    {% if session["usertype"] != "admin" %}
+                        <li {% if request.path == url_for('info') %}class="active"{% endif %}><a href="{{url_for('info')}}">Kontakt</a></li>
+                    {% endif %}
+                {% else %}
+                    <li {% if request.path == url_for('info') %}class="active"{% endif %}><a href="{{url_for('info')}}">Kontakt</a></li>
+                {% endif %}
+            </ul>
+            <ul style="float: right;">
+                {% if "username" in session %}
+                    <li>{{ session["username"] }}</li>
+                    <li><a href="{{url_for('odhlasit')}}" style="color: white">Odhlásit se</a></li>
+                {% else %}
+                    <li><a href="{{url_for('login2')}}">Přihlášení</a></li>
+                    <li><a href="{{url_for('registrace2')}}">Registrace</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="obsah">
+    <!-- Cokoliv kromě řádku 30-32 se bude zobrazovat všude-->
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+<!--
+<footer>
+    <div class="down_container">
+        <p>Copyright © 2022 Web pro potápěče</p>
+    </div>
+</footer>
+-->
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-row">
+      <div class="footer-column">
+        <h3>O nás</h3>
+        <p>Vítejte na mojí stránce, která vznikla jako můj maturitní projekt.
+            Toto téma jsem si zvolil, protože posledních pár let je potápění mým koníčkem.
+            Za tu dobu jsem nenarazil na žádnou stránku, kde by bylo více instruktorů a já si
+            mohl vybrat z jejich služeb. Proto jsem si řekl, že vytvořím tuto webovou stránku. </p>
+      </div>
+      <div class="footer-column">
+        <h3>Kontakt</h3>
+        <ul>
+          <li>Email: simon.krejci@educenet.cz</li>
+          <li>Telefon: +420 123 456 789</li>
+          <li>Adresa: Praha 1, 110 00</li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Odkazy</h3>
+        <ul>
+          <li><a href="#">Úvodní stránka</a></li>
+          <li><a href="#">O projektu</a></li>
+          <li><a href="#">Kontakt</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2023 Webová stránka pro potápeče. Všechna práva vyhrazena.</p>
+  </div>
+</footer>
+
+
+
+
+
+
+<script>
+    function mistoChange(id){
+        inputs = document.getElementById("nove-misto").getElementsByTagName("input");
+        if(id == "nove"){
+            document.getElementById("nove-misto").style.display = "block";
+            for(var i = 0; i < inputs.length; i++){
+                inputs[i].setAttribute("required", "");
+            }
+        }
+        else{
+            document.getElementById("nove-misto").style.display = "none";
+            for(var i = 0; i < inputs.length; i++){
+                inputs[i].removeAttribute("required");
+            }
+        }
+    }
+    function statusChange(checked){
+        document.getElementById("instruktor-udaje").style.display = checked == "instruktor" ? "block" : "none";
+        if(checked == "instruktor"){
+            document.getElementById("cena").setAttribute("required", "")
+            document.getElementById("ucet").setAttribute("required", "")
+        }
+        else{
+            document.getElementById("cena").removeAttribute("required");
+            document.getElementById("ucet").removeAttribute("required");
+        }
+    }
+    function filtrace(){
+        btn = document.getElementsByClassName("skryty-button")[0];
+        form = document.getElementsByClassName("skryty-form")[0];
+        btn.style.display = btn.style.display == "none" ? "inline-block" : "none";
+        form.style.display = form.style.display == "none" ? "inline-block" : "none";
+    }
+    $(".multioption").mousedown(function(e){
+        e.preventDefault();
+        $(this).prop('selected', $(this).prop('selected') ? false : true);
+        $(this).parent().focus();
+    });
+</script>
+
+</body>
+</html>

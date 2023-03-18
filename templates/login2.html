@@ -1,0 +1,43 @@
+<!--Navigacni lista + footer-->
+{%extends 'navbar.html'%}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+<!--<h2>Toto je stránka login</h2>-->
+<div class="standard-form">
+  <h2>Login</h2>
+  <form class="login" method="POST" action="{{url_for('login2') }}">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+  <!--Vyberove tlacitko-->
+    <input type="radio" id="instruktor" name="usertype" value="instruktor" required class="vyberove-tlacitko"><label for="instruktor">Instruktor</label>
+    <input type="radio" id="student" name="usertype" value="student" required class="vyberove-tlacitko"><label for="student">Student</label>
+
+  <!--Zadání špatných údajů-->
+    {%
+      if data == "wrong"
+    %}
+      <p style="color: red">Zadány špatné přihlašovací údaje!</p>
+    {%
+      elif data == "non-existent"
+    %}
+      <p style="color: red">Tento účet neexistuje!</p>
+    {% endif %}
+
+    <input type="submit" value="Odeslat" class="button-submit">
+
+  </form>
+
+<a href="{{url_for('forgotten')}}" class="a-inline">Zapomenuté heslo?</a>
+<p>Nemáte účet? <a href="{{url_for('registrace2')}}" class="a-inline">Registrujte se!</a></p>
+
+</div>
+
+{% endblock %}

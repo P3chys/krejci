@@ -1,0 +1,32 @@
+<!--Navigacni lista + footer-->
+{%extends 'navbar.html'%}
+
+{% block title %}
+Zapomenuté heslo
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='forgotten.css') }}">
+
+<div class="standard-form">
+  <h2>Zapomenuté heslo</h2>
+  <form class="login" method="POST" action="">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <input type="radio" id="instruktor" name="usertype" value="instruktor" required><label for="instruktor" style="padding: 0;">Instruktor</label>
+    <input type="radio" id="student" name="usertype" value="student" required><label for="student" style="padding: 0;">Student</label>
+
+    {%
+      if data == "sent"
+    %}
+      <p style="color: green">Na váš e-mail bylo zasláno nové heslo!</p>
+    {% elif data == "non-existent" %}
+      <p style="color: red">Účet s tímto uživatelským jménem neexistuje!</p>
+    {% endif %}
+    <input type="submit" value="Submit">
+  </form>
+  <p>Znáte heslo? <a href="{{url_for('login2')}}" class="a-inline">Přihlaste se!</a></p>
+</div>
+
+{% endblock %}

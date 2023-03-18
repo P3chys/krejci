@@ -1,0 +1,82 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #333;
+  color: #fff;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+td:nth-child(3) {
+  text-transform: capitalize;
+}
+
+td {
+  border-right: 1px solid #ccc;
+}
+
+th:last-child,
+td:last-child {
+  border-right: none;
+}
+
+
+.container_1 {
+  background-color: #0D659D;
+  padding:50px;
+}
+
+.nadpis-stranka {
+  color: black;
+  margin: 10px 0px 10px 0px;
+}
+
+tr {
+  background-color: white;
+}
+
+form {
+  float: left;
+  margin-right: 20px;
+}
+
+
+/* změna stylu dropdownu při najetí myší */
+#filtr:hover {
+  background-color: #ddd;
+}
+
+/* změna stylu dropdownu po otevření */
+#filtr:focus {
+  outline: none;
+  background-color: #ddd;
+}
+
+/* zobrazení nabídky filtrů */
+.dropdown-menu select {
+  display: none;
+  position: absolute;
+  z-index: 1;
+}
+
+/* zobrazení nabídky filtrů po kliknutí */
+.dropdown-menu select:active,
+.dropdown-menu select:focus {
+  display
+
+

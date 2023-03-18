@@ -1,0 +1,60 @@
+{%extends 'navbar.html'%}
+
+{% block title %}
+Instruktoři
+{% endblock %}
+
+<!--Data, ktere se mi zobrazuji jenom na teto strance a nikde jinde ne -->
+{% block content %}
+
+<h2>Profil studenta</h2>
+<form method="POST">
+	<table rules="rows" border="1">
+		<tr>
+			<td>Username</td>
+			<td style="width: 200px">{{ session["username"] }}</td>
+		</tr>
+		<tr>
+			<td>Jméno</td>
+			<td><input type="text" value="{{student.jmeno}}" name="jmeno"></td>
+		</tr>
+		<tr>
+			<td>Příjmení</td>
+			<td><input type="text" value="{{student.prijmeni}}" name="prijmeni"></td>
+		</tr>
+		<tr>
+			<td>Datum narození</td>
+			<td><input type="date" value="{{student.datum_narozeni}}" name="datum_narozeni"></td>
+		</tr>
+		<tr>
+			<td>Telefon</td>
+			<td><input type="tel" value="{{student.telefon}}" name="telefon" pattern="[0-9]{9}"></td>
+		</tr>
+		<tr>
+			<td>E-mail</td>
+			<td><input type="email" value="{{student.email}}" name="email"></td>
+		</tr>
+		<tr>
+			<td>Certifikace</td>
+			<td>
+				<select multiple size="10" name="certifikace">
+				{% for c in certifikace %}
+					{% if c.id_c in c_studenta %}
+						<option class="multioption" value="{{c.id_c}}" selected>{{c.licence}}</option>
+					{% else %}
+						<option class="multioption" value="{{c.id_c}}">{{c.licence}}</option>
+					{% endif %}
+				{% endfor %}
+				</select>
+			</td>
+		</tr>
+	</table>
+	<input type="submit" value="Změnit údaje">
+</form>
+<style>
+	input{
+		margin-bottom: 0px !important;
+	}
+</style>
+
+{% endblock %}

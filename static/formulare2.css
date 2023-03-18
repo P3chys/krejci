@@ -1,0 +1,113 @@
+
+.standard-form {
+    background-color: #0D659D;
+    width: 25vw;
+    margin: 50px 0px;
+    padding: 20px;
+    text-align: center;
+}
+
+/*
+.forgot-form{
+    background-color: #0D659D;
+    width: 25vw;
+    margin: 50px 25%;
+    padding: 20px;
+    text-align: center;
+}
+*/
+
+
+h1, h2, h3, h4 {
+    margin: 1px 0px 3px 0px;
+    text-align: center;
+    color: white;
+    font-size: 50px;
+}
+
+form {
+    display: inline-block;
+    text-align: left;
+}
+
+label, 
+input[type="text"], 
+input[type="password"], 
+input[type="date"], 
+input[type="tel"], 
+input[type="number"], 
+input[type="email"],
+input[type="datetime-local"],
+input[type="time"],
+select,
+textarea{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+textarea{
+    resize: vertical;
+}
+
+input[type="submit"]:not(.zapsat-button, .odhlasit-button) {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #05263B;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+
+.a-inline {
+    color: white;
+    text-decoration: none;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+input[type="submit"]:not(.zapsat-button, .odhlasit-button):hover {
+    background-color: #BBC8DE;
+    color: black;
+}
+
+.odhlasit-button,
+.zapsat-button{
+    width: 100%;
+    padding: 10px 20px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #009900;
+}
+
+.odhlasit-button{
+    background-color: #f33;
+}
+
+.zapsat-button{
+    background-color: #090;
+}
+
+.odhlasit-button:hover,
+.zapsat-button:hover,
+.hledat:hover,
+#zrusit-hledani:hover{
+    opacity: 0.7;
+}
+
+
+/*login*/
+.login{
+    color: white;
+}
+
+.text1 {
+    color: white;
+}

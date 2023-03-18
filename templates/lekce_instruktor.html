@@ -1,0 +1,127 @@
+{%extends 'navbar.html'%}
+
+{% block title %}
+Lekce
+{% endblock %}
+
+{% block content %}
+  {% if not edit %}
+    <h2>Moje lekce</h2>
+    {% for l in lekce %}
+      <div class="karta">
+        <h3>{{l.nazev}}</h3>
+        <p>{{l.popis}}</p>
+        <ul>
+          <li>Lekce se uskuteční: {{l.datum}}</li>
+          <li>Délka trvání: {{l.delka_trvani}}</li>
+          <li>Adresa: {{l.ulice}} {{l.cislo_popisne}}, {{l.mesto}} {{l.smerovaci_cislo}}</li>
+        </ul>
+        <h4>Přihlášení studenti</h4>
+        <table rules="rows" border="1">
+          <thead>
+            <tr>
+              <th>Jméno</th>
+              <th>Příjmení</th>
+              <th>Certifikace</th>
+              <th>Telefon</th>
+              <th>E-mail</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for prihlaska in prihlasky %}
+              {% if prihlaska.id_l == l.id_l %}
+                <tr>
+                  <td>{{ prihlaska.jmeno }}</td>
+                  <td>{{ prihlaska.prijmeni }}</td>
+                  <td>{{ certifikace[prihlaska.id_studenta] }}</td>
+                  <td>{{ prihlaska.telefon }}</td>
+                  <td>{{ prihlaska.email }}</td>
+                </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+        <a href="lekce?edit={{ l.id_l }}"><button class="zapsat-button" style="margin-top: 20px;">Editovat lekci</button></a>
+        <form action="" method="POST" style="width: 100%;">
+          <input type="hidden" value="{{ l.id_l }}" name="delete">
+          <input type="submit" class="odhlasit-button" value="Odstranit lekci" style="margin-top: 5px;">
+        </form>
+      </div>
+    {% endfor %}
+  {% else %}
+    <h2>Zde můžete editovat lekci</h2>
+  {% endif %}
+  <div class="standard-form" style="width: 35vw">
+    {% if not edit %}
+      <h2>Vytvořit novou lekci</h2>
+      <form action="{{url_for('lekce')}}" method="POST">
+        <input type="hidden" name="edit" value="0">
+        <label>Název lekce</label>
+        <input type="text" name="nazev" required>
+        <label>Popis lekce</label>
+        <textarea name="popis" required></textarea>
+        <label>Datum a čas</label>
+        <input type="datetime-local" name="datetime" required max="9999-12-31 23:59">
+        <label>Doba trvání lekce</label>
+        <input type="time" name="trvani" required>
+        <label>Místo konání</label>
+        <select name="select_misto" onchange="mistoChange(this.value);">
+          <option selected value="nove">Vytvořit nové místo</option>
+          {% for misto in mista %}
+            <option value="{{misto.id_m}}">{{misto.ulice}} {{misto.cislo_popisne}}, {{misto.mesto}} {{misto.smerovaci_cislo}}</option>
+          {% endfor %}
+        </select>
+    
+        <!-- Pokud nebyla vybrána lokace, vytvořit novou -->
+        <div id="nove-misto">
+          <label>Ulice</label>
+          <input type="text" name="ulice" required>
+          <label>Číslo popisné</label>
+          <input type="number" name="cislo_popisne" required>
+          <label>Město</label>
+          <input type="text" name="mesto" required>
+          <label>PSČ</label>
+          <input type="number" name="psc" required>
+        </div>
+        <input type="submit" value="Submit">
+      </form>
+    {% else %}
+      <h2>Editovat lekci</h2>
+      <form action="{{url_for('lekce')}}" method="POST">
+        <input type="hidden" name="edit" value="{{ edit }}">
+        <label>Název lekce</label>
+        <input type="text" name="nazev" required value="{{ lekce.nazev }}">
+        <label>Popis lekce</label>
+        <textarea name="popis" required>{{ lekce.popis }}</textarea>
+        <label>Datum a čas</label>
+        <input type="datetime-local" name="datetime" required max="9999-12-31 23:59" value="{{ lekce.datum }}">
+        <label>Doba trvání lekce</label>
+        <input type="time" name="trvani" required value="{{ lekce.delka_trvani }}">
+        <label>Místo konání</label>
+        <select name="select_misto" onchange="mistoChange(this.value);">
+          <option value="nove">Vytvořit nové místo</option>
+          {% for misto in mista %}
+            {% if misto.id_m == lekce.id_m %}
+              <option selected value="{{misto.id_m}}">{{misto.ulice}} {{misto.cislo_popisne}}, {{misto.mesto}} {{misto.smerovaci_cislo}}</option>
+            {% else %}
+              <option value="{{misto.id_m}}">{{misto.ulice}} {{misto.cislo_popisne}}, {{misto.mesto}} {{misto.smerovaci_cislo}}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+    
+        <!-- Pokud nebyla vybrána lokace, vytvořit novou -->
+        <div id="nove-misto" style="display: none;">
+          <label>Ulice</label>
+          <input type="text" name="ulice">
+          <label>Číslo popisné</label>
+          <input type="number" name="cislo_popisne">
+          <label>Město</label>
+          <input type="text" name="mesto">
+          <label>PSČ</label>
+          <input type="number" name="psc">
+        </div>
+        <input type="submit" value="Submit">
+      </form>
+    {% endif %}
+  </div>
+{% endblock %}

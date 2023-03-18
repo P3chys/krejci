@@ -1,0 +1,66 @@
+
+/* Navbar */
+.navbar .logo {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: left;
+    margin-right: auto;
+    transition: transform 0.3s ease;
+}
+
+.navbar .logo:hover {
+    transform: scale(1.2);
+}
+
+header {
+    background-color: #05263B;
+    color: #fff;
+    margin: 0px 0px 0px 0px;
+}
+
+.navbar {
+    height: 60px;
+    padding-right: 20px;
+}
+
+nav{
+    padding-top: 18.7px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline-block;
+    margin-left: 30px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+nav a:hover.active {
+    text-decoration: underline;
+
+}
+
+nav ul li.active a {
+    background-color: #BBC8DE;
+    color: black;
+    height: 100%;
+    padding-top: 10px; /* 60px - výška linky */
+    padding-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 10px;
+}
+

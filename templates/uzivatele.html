@@ -1,0 +1,101 @@
+<!--Navigacni lista + footer-->
+{%extends 'navbar.html'%}
+
+{% block title %}
+Seznam uživatelů
+{% endblock %}
+
+{% block content %}
+  <h1>Seznam uživatelů</h1>
+  <form method="GET" action="" id="flex-form">
+    <button type="submit" title="Hledat" class="hledat"><i class="fas fa-search" aria-hidden="true"></i></button>
+    <input type="text" placeholder="Hledat uživatele" name="search" autofocus autocomplete="off" id="blick">
+    <button id="zrusit-hledani" onclick="zrusitHledani();"><i class="fa-solid fa-xmark"></i></button>
+  </form>
+  <script>
+    urlParams = new URLSearchParams(window.location.search);
+    search = urlParams.get("search");
+    document.getElementById("blick").value = search;
+    if(search != "" && search != undefined){
+      document.getElementById("zrusit-hledani").style.display = "inline-block";
+    }
+    function zrusitHledani(){
+      event.preventDefault();
+      window.location.href = "uzivatele";
+    }
+  </script>
+  <h2>Studenti:</h2>
+  {% if studenti|length != 0 %}
+    <table rules="rows" border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Jméno</th>
+          <th>Příjmení</th>
+          <th>Uživatelské jméno</th>
+          <th>E-mail</th>
+          <th>Telefon</th>
+          <th>Akce</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in studenti %}
+          <tr>
+            <td>{{ student["id"]|safe }}</td>
+            <td>{{ student["jmeno"]|safe }}</td>
+            <td>{{ student["prijmeni"]|safe }}</td>
+            <td>{{ student["username"]|safe }}</td>
+            <td>{{ student["email"]|safe }}</td>
+            <td>{{ student["telefon"]|safe }}</td>
+            <td>
+              <form method="post">
+                <input type="hidden" name="user_id" value="{{ student['id'] }}">
+                <input type="hidden" name="status" value="student">
+                <input type="submit" value="Smazat" class="odhlasit-button">
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p style="text-align: center">Žádná shoda</p>
+  {% endif %}
+  <h2>Instruktoři:</h2>
+  {% if instruktori|length != 0 %}
+    <table rules="rows" border="1">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Jméno</th>
+          <th>Příjmení</th>
+          <th>Uživatelské jméno</th>
+          <th>E-mail</th>
+          <th>Telefon</th>
+          <th>Akce</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for instruktor in instruktori %}
+          <tr>
+            <td>{{ instruktor["id"]|safe }}</td>
+            <td>{{ instruktor["jmeno"]|safe }}</td>
+            <td>{{ instruktor["prijmeni"]|safe }}</td>
+            <td>{{ instruktor["username"]|safe }}</td>
+            <td>{{ instruktor["email"]|safe }}</td>
+            <td>{{ instruktor["telefon"]|safe }}</td>
+            <td>
+              <form method="post">
+                <input type="hidden" name="user_id" value="{{ instruktor['id'] }}">
+                <input type="hidden" name="status" value="instruktor">
+                <input type="submit" value="Smazat" class="odhlasit-button">
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p style="text-align: center">Žádná shoda</p>
+  {% endif %}
+{% endblock %}

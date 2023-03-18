@@ -1,0 +1,13 @@
+<!--Navigacni lista-->
+{%extends 'navbar.html'%}
+
+{% block title %}
+O projektu
+{% endblock %}
+
+<!--Data, ktere se mi zobrazuji jenom na teto strance a nikde jinde ne -->
+{% block content %}
+<link rel="stylesheet" href="{{url_for('static', filename='o_projektu.css') }}>
+
+
+{% endblock %}
